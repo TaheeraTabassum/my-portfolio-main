@@ -1,939 +1,1327 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8 " >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <head>
+    <meta charset="UTF-8 " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tahira Tabassum || Front-End Developer</title>
-    <link rel="shortcut icon" href="https://i.ibb.co.com/hJh3G6G3/Green-White-Professional-Minimal-Brand-Logo-1.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="https://i.ibb.co.com/hJh3G6G3/Green-White-Professional-Minimal-Brand-Logo-1.png"
+      type="image/x-icon"
+    />
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        /* Base styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+      /* Base styles */
+      body {
+        font-family: "Inter", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* Custom Tailwind Configuration for smooth transitions (Hovers) */
+      .transition-default {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* --- Animation Styles (Kept the same) --- */
+      .hidden-element {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+
+      .animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .delay-100 {
+        transition-delay: 0.1s;
+      }
+
+      /* ... other delays are inherited from the original file ... */
+
+      /* Skill and About card hover effects */
+      .skill-card {
+        /* Using dark theme shadow for depth */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* UPDATED: Darker shadow and brighter background for dark theme hover */
+      .skill-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 25px -5px rgba(96, 165, 250, 0.3),
+          0 4px 6px -4px rgba(96, 165, 250, 0.3);
+        background-color: #2b3a50;
+        /* Slightly lighter slate on hover */
+      }
+
+      .about-card:hover {
+        border-color: #60a5fa;
+        /* Accent blue border on hover */
+        transform: translateY(-4px);
+      }
+
+      .section-padding {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+
+      /* Loading Spinner */
+      .loader {
+        border: 4px solid #334155;
+        /* Darker border base */
+        border-top: 4px solid #60a5fa;
+        /* Vibrant blue top border */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+      }
+      .fade-in-left {
+        opacity: 0;
+        transform: translateX(-60px); /* start 30px left */
+        animation: fadeInLeft 1.5s ease-out forwards;
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-60px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
 
-        /* Custom Tailwind Configuration for smooth transitions (Hovers) */
-        .transition-default {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        100% {
+          transform: rotate(360deg);
         }
+      }
 
-        /* --- Animation Styles (Kept the same) --- */
-        .hidden-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1.0s ease-out, transform 1.0s ease-out;
-        }
-
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-100 {
-            transition-delay: 0.1s;
-        }
-
-        /* ... other delays are inherited from the original file ... */
-
-        /* Skill and About card hover effects */
-        .skill-card {
-            /* Using dark theme shadow for depth */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* UPDATED: Darker shadow and brighter background for dark theme hover */
-        .skill-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 25px -5px rgba(96, 165, 250, 0.3), 0 4px 6px -4px rgba(96, 165, 250, 0.3);
-            background-color: #2b3a50;
-            /* Slightly lighter slate on hover */
-        }
-
-        .about-card:hover {
-            border-color: #60a5fa;
-            /* Accent blue border on hover */
-            transform: translateY(-4px);
-        }
-
-        .section-padding {
-            padding-top: 6rem;
-            padding-bottom: 6rem;
-        }
-
-        /* Loading Spinner */
-        .loader {
-            border: 4px solid #334155;
-            /* Darker border base */
-            border-top: 4px solid #60a5fa;
-            /* Vibrant blue top border */
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-        }
-       .fade-in-left {
-  opacity: 0;
-  transform: translateX(-60px); /* start 30px left */
-  animation: fadeInLeft 1.5s ease-out forwards;
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* NEW: Subtle background effect for Home section (Dot pattern) */
-        #home {
-            background-image: radial-gradient(circle at 1px 1px, #1e293b 1px, transparent 0);
-            background-size: 15px 15px;
-        }
+      /* NEW: Subtle background effect for Home section (Dot pattern) */
+      #home {
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          #1e293b 1px,
+          transparent 0
+        );
+        background-size: 15px 15px;
+      }
     </style>
     <!-- Tailwind Configuration for custom colors -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // New Dark Theme Colors
-                        'primary-dark': '#0f172a', // Slate 900 for background
-                        'secondary-dark': '#1e293b', // Slate 800 for cards/sections
-                        'accent-blue': '#60a5fa', // Vibrant Blue 400
-                        'primary-text': '#e2e8f0', // Slate 200 for main text
-                        'subtle-text': '#94a3b8', // Slate 400 for secondary text
-                        'accent-green': '#10b981', // Keeping green for positive feedback/minor accent
-                        'divider-dark': '#334155', // Slate 700 for borders
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // New Dark Theme Colors
+              "primary-dark": "#0f172a", // Slate 900 for background
+              "secondary-dark": "#1e293b", // Slate 800 for cards/sections
+              "accent-blue": "#60a5fa", // Vibrant Blue 400
+              "primary-text": "#e2e8f0", // Slate 200 for main text
+              "subtle-text": "#94a3b8", // Slate 400 for secondary text
+              "accent-green": "#10b981", // Keeping green for positive feedback/minor accent
+              "divider-dark": "#334155", // Slate 700 for borders
+            },
+          },
+        },
+      };
     </script>
-</head>
-<!-- UPDATED: Body uses primary-dark background and primary-text color -->
+  </head>
+  <!-- UPDATED: Body uses primary-dark background and primary-text color -->
 
-<body class="bg-primary-dark text-primary-text">
-
+  <body class="bg-primary-dark text-primary-text">
     <!-- Gemini Modal for AI Responses -->
-    <div id="geminiModal" class="fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-[100] hidden">
-        <!-- UPDATED: Modal uses secondary-dark BG and primary-text -->
+    <div
+      id="geminiModal"
+      class="fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-[100] hidden"
+    >
+      <!-- UPDATED: Modal uses secondary-dark BG and primary-text -->
+      <div
+        class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-2xl max-w-lg w-full m-4 border border-divider-dark transition-default transform scale-95 opacity-0 duration-300"
+      >
+        <h3
+          id="modalTitle"
+          class="text-2xl font-bold text-accent-blue mb-4 border-b border-divider-dark pb-2"
+        >
+          AI Response
+        </h3>
         <div
-            class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-2xl max-w-lg w-full m-4 border border-divider-dark transition-default transform scale-95 opacity-0 duration-300">
-            <h3 id="modalTitle" class="text-2xl font-bold text-accent-blue mb-4 border-b border-divider-dark pb-2">AI
-                Response</h3>
-            <div id="modalContent" class="text-primary-text space-y-4 mb-6 max-h-[70vh] overflow-y-auto">
-                <!-- Content inserted here -->
-            </div>
-            <!-- UPDATED: Source text uses subtle-text -->
-            <div id="modalSources" class="text-xs text-subtle-text mt-4 border-t border-divider-dark pt-2 hidden">
-                <p class="font-semibold mb-1">Sources (via Google Search):</p>
-                <ul id="sourcesList" class="list-disc pl-5 space-y-1"></ul>
-            </div>
-            <button id="closeModal"
-                class="w-full py-2 mt-4 text-lg font-semibold text-white bg-accent-blue rounded-lg hover:bg-blue-500 transition-default">Close</button>
+          id="modalContent"
+          class="text-primary-text space-y-4 mb-6 max-h-[70vh] overflow-y-auto"
+        >
+          <!-- Content inserted here -->
         </div>
+        <!-- UPDATED: Source text uses subtle-text -->
+        <div
+          id="modalSources"
+          class="text-xs text-subtle-text mt-4 border-t border-divider-dark pt-2 hidden"
+        >
+          <p class="font-semibold mb-1">Sources (via Google Search):</p>
+          <ul id="sourcesList" class="list-disc pl-5 space-y-1"></ul>
+        </div>
+        <button
+          id="closeModal"
+          class="w-full py-2 mt-4 text-lg font-semibold text-white bg-accent-blue rounded-lg hover:bg-blue-500 transition-default"
+        >
+          Close
+        </button>
+      </div>
     </div>
 
     <!-- Navigation Bar -->
     <!-- UPDATED: Header uses secondary-dark BG and subtle border -->
-    <header class="sticky top-0 z-50 bg-secondary-dark shadow-xl border-b border-divider-dark">
-        <div class="max-w-7xl mx-auto px-2 py-1 sm:px-6 items-center flex justify-between">
-            <img class="w-40" src="https://i.ibb.co.com/zd2P62q/Green-White-Professional-Minimal-Brand-Logo-removebg-preview.png" alt="">
+    <header
+      class="sticky top-0 z-50 bg-secondary-dark shadow-xl border-b border-divider-dark"
+    >
+      <div
+        class="max-w-7xl mx-auto px-2 py-1 sm:px-6 items-center flex justify-between"
+      >
+        <img
+          class="w-40"
+          src="https://i.ibb.co.com/zd2P62q/Green-White-Professional-Minimal-Brand-Logo-removebg-preview.png"
+          alt=""
+        />
 
-            <nav class="hidden md:flex space-x-8 ">
-                <!-- UPDATED: Navigation links use subtle-text -->
-                <a href="#home" class="text-subtle-text hover:text-accent-blue font-medium transition-default">Home</a>
-                <a href="#about"
-                    class="text-subtle-text hover:text-accent-blue font-medium transition-default">About</a>
-                <a href="#education"
-                    class="text-subtle-text hover:text-accent-blue font-medium transition-default">Education</a>
-                <a href="#skills"
-                    class="text-subtle-text hover:text-accent-blue font-medium transition-default">Skills</a>
-                <a href="#projects"
-                    class="text-subtle-text hover:text-accent-blue font-medium transition-default">Projects</a>
-                    <a href=""></a>
-
-            </nav>
-            <a href="#contact"
-                class="px-8 py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-105">Contact</a>
-            <!-- Mobile Menu Placeholder -->
-            <button class="md:hidden text-primary-text hover:text-accent-blue p-2 rounded-md transition-default">
-
-            </button>
-        </div>
+        <nav class="hidden md:flex space-x-8">
+          <!-- UPDATED: Navigation links use subtle-text -->
+          <a
+            href="#home"
+            class="text-subtle-text hover:text-accent-blue font-medium transition-default"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="text-subtle-text hover:text-accent-blue font-medium transition-default"
+            >About</a
+          >
+          <a
+            href="#education"
+            class="text-subtle-text hover:text-accent-blue font-medium transition-default"
+            >Education</a
+          >
+          <a
+            href="#skills"
+            class="text-subtle-text hover:text-accent-blue font-medium transition-default"
+            >Skills</a
+          >
+          <a
+            href="#projects"
+            class="text-subtle-text hover:text-accent-blue font-medium transition-default"
+            >Projects</a
+          >
+          <a href=""></a>
+        </nav>
+        <a
+          href="#contact"
+          class="px-8 py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-105"
+          >Contact</a
+        >
+        <!-- Mobile Menu Placeholder -->
+        <button
+          class="md:hidden text-primary-text hover:text-accent-blue p-2 rounded-md transition-default"
+        ></button>
+      </div>
     </header>
-    
 
     <!-- Hero Section -->
     <!-- UPDATED: Section uses primary-dark background (now with pattern via CSS) -->
-    <section id="home" class="section-padding min-h-screen flex items-center bg-primary-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 grid md:grid-cols-2 md:gap-20 items-center">
-            <!-- Text Content -->
-            <div class="space-y-6">
-                <p class="text-xl font-medium text-accent-blue uppercase fade-in-left">
-                    Hi, I'm Tahira Tabassum
-                </p>
-                <h1
-                    class="text-5xl sm:text-6xl lg:text-4xl font-extrabold tracking-tight text-primary-text leading-tight hidden-element delay-200">
-                    <span class="block">I Build Modern,</span>
-                    <span class="block text-accent-blue">Responsive Web Applications.</span>
-                </h1>
-                <!-- UPDATED: Pitch uses subtle-text -->
-                <p id="hero-pitch" class="text-xl text-subtle-text max-w-lg hidden-element delay-300">
-                    A dedicated Front-End Developer specializing in high-performance UIs, blending design aesthetics
-                    with technical excellence.
-                </p>
-                <div class="grid grid-cols-3 w-40 ">
-                    <a class="w-8" href="https:/www.linkedin.com/in/tahira-tabassum-413123336">
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#fafcff" d="M196.3 512L103.4 512L103.4 212.9L196.3 212.9L196.3 512zM149.8 172.1C120.1 172.1 96 147.5 96 117.8C96 103.5 101.7 89.9 111.8 79.8C121.9 69.7 135.6 64 149.8 64C164 64 177.7 69.7 187.8 79.8C197.9 89.9 203.6 103.6 203.6 117.8C203.6 147.5 179.5 172.1 149.8 172.1zM543.9 512L451.2 512L451.2 366.4C451.2 331.7 450.5 287.2 402.9 287.2C354.6 287.2 347.2 324.9 347.2 363.9L347.2 512L254.4 512L254.4 212.9L343.5 212.9L343.5 253.7L344.8 253.7C357.2 230.2 387.5 205.4 432.7 205.4C526.7 205.4 544 267.3 544 347.7L544 512L543.9 512z"/></svg>
-                    </a>
-                    <a class="w-8"  href="https://github.com/TaheeraTabassum"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#eff0f0" d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z"/></svg></a>
-                    <a class="w-8"  href="https://www.upwork.com/freelancers/~01025657604ff1df7d?mp_source=share"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#e6e8ea" d="M493.9 359.6C443.6 359.6 410.4 320.7 401.1 305.7C413 210.4 447.9 180.3 493.9 180.3C539.4 180.3 574.8 216.7 574.8 270C574.8 323.3 539.4 359.7 493.9 359.7L493.9 359.6zM493.9 121.8C412 121.8 366.1 175.2 352.9 230.2C338 202.2 327 164.7 318.4 129.9L205.2 129.9L205.2 270.9C205.2 322 181.9 359.9 136.4 359.9C90.9 359.9 64.8 322.1 64.8 270.9L65.3 129.9L0 129.9L0 270.9C0 312 13.3 349.3 37.6 376C62.6 403.5 96.8 417.8 136.4 417.8C215.2 417.8 270.2 357.4 270.2 270.9L270.2 176.1C278.4 207.3 298 267.2 335.5 319.7L300.5 519.1L366.9 519.1L390 377.8C397.6 384.1 405.7 389.8 414.2 394.8C436.4 408.8 461.9 416.7 488.1 417.6C488.1 417.6 492.1 417.8 494.2 417.8C575.4 417.8 640.1 354.9 640.1 270C640.1 185.1 575.3 121.9 494.1 121.9L493.9 121.8z"/></svg></a>
-                </div>
-                <div
-                    class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4 hidden-element delay-400">
-                    <a href="#projects"
-                        class="px-8 py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-105">
-                        View Projects
-                    </a>
-                    <!-- UPDATED: Download CV button text and background colors for dark mode -->
-                    <a href="https://drive.google.com/file/d/1BkGdTdvHPRDrpiQHy8sDJG04u7BnmznP/view?usp=sharing"
-                        class="px-8 py-3 text-lg font-semibold text-accent-blue bg-primary-dark border border-accent-blue rounded-lg shadow-md hover:bg-accent-blue hover:text-white transition-default transform hover:scale-105">
-                        View CV
-                    </a>
-                </div>
-            </div>
-
-            <!-- Image/Mockup Placeholder -->
-            <div class="hidden md:flex justify-center hidden-element delay-500">
-                <!-- UPDATED: Placeholder background for dark theme -->
-                <div
-                    class="w-82 h-82 rounded-full bg-secondary-dark border-4 border-accent-blue shadow-xl flex items-center justify-center ">
-                    <!-- Placeholder for professional photo or avatar -->
-                                <img  class=" rounded-full" src="https://i.ibb.co.com/G3TXC8HW/Gemini-Generated-Image-7wk6as7wk6as7wk6.png
-" alt="">
-                </div>
-            
-        
-                
-            </div>
+    <section
+      id="home"
+      class="section-padding min-h-screen flex items-center bg-primary-dark"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 grid md:grid-cols-2 md:gap-20 items-center"
+      >
+        <!-- Text Content -->
+        <div class="space-y-6">
+          <p
+            class="text-xl font-medium text-accent-blue uppercase fade-in-left"
+          >
+            Hi, I'm Tahira Tabassum
+          </p>
+          <h1
+            class="text-5xl sm:text-6xl lg:text-4xl font-extrabold tracking-tight text-primary-text leading-tight hidden-element delay-200"
+          >
+            <span class="block">I Build Modern,</span>
+            <span class="block text-accent-blue"
+              >Responsive Web Applications.</span
+            >
+          </h1>
+          <!-- UPDATED: Pitch uses subtle-text -->
+          <p
+            id="hero-pitch"
+            class="text-xl text-subtle-text max-w-lg hidden-element delay-300"
+          >
+            A dedicated Front-End Developer specializing in high-performance
+            UIs, blending design aesthetics with technical excellence.
+          </p>
+          <div class="grid grid-cols-3 w-40">
+            <a
+              class="w-8"
+              href="https:/www.linkedin.com/in/tahira-tabassum-413123336"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                  fill="#fafcff"
+                  d="M196.3 512L103.4 512L103.4 212.9L196.3 212.9L196.3 512zM149.8 172.1C120.1 172.1 96 147.5 96 117.8C96 103.5 101.7 89.9 111.8 79.8C121.9 69.7 135.6 64 149.8 64C164 64 177.7 69.7 187.8 79.8C197.9 89.9 203.6 103.6 203.6 117.8C203.6 147.5 179.5 172.1 149.8 172.1zM543.9 512L451.2 512L451.2 366.4C451.2 331.7 450.5 287.2 402.9 287.2C354.6 287.2 347.2 324.9 347.2 363.9L347.2 512L254.4 512L254.4 212.9L343.5 212.9L343.5 253.7L344.8 253.7C357.2 230.2 387.5 205.4 432.7 205.4C526.7 205.4 544 267.3 544 347.7L544 512L543.9 512z"
+                />
+              </svg>
+            </a>
+            <a class="w-8" href="https://github.com/TaheeraTabassum"
+              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                  fill="#eff0f0"
+                  d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z"
+                /></svg
+            ></a>
+            <a
+              class="w-8"
+              href="https://www.upwork.com/freelancers/~01025657604ff1df7d?mp_source=share"
+              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                  fill="#e6e8ea"
+                  d="M493.9 359.6C443.6 359.6 410.4 320.7 401.1 305.7C413 210.4 447.9 180.3 493.9 180.3C539.4 180.3 574.8 216.7 574.8 270C574.8 323.3 539.4 359.7 493.9 359.7L493.9 359.6zM493.9 121.8C412 121.8 366.1 175.2 352.9 230.2C338 202.2 327 164.7 318.4 129.9L205.2 129.9L205.2 270.9C205.2 322 181.9 359.9 136.4 359.9C90.9 359.9 64.8 322.1 64.8 270.9L65.3 129.9L0 129.9L0 270.9C0 312 13.3 349.3 37.6 376C62.6 403.5 96.8 417.8 136.4 417.8C215.2 417.8 270.2 357.4 270.2 270.9L270.2 176.1C278.4 207.3 298 267.2 335.5 319.7L300.5 519.1L366.9 519.1L390 377.8C397.6 384.1 405.7 389.8 414.2 394.8C436.4 408.8 461.9 416.7 488.1 417.6C488.1 417.6 492.1 417.8 494.2 417.8C575.4 417.8 640.1 354.9 640.1 270C640.1 185.1 575.3 121.9 494.1 121.9L493.9 121.8z"
+                /></svg
+            ></a>
+          </div>
+          <div
+            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4 hidden-element delay-400"
+          >
+            <a
+              href="#projects"
+              class="px-8 py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-105"
+            >
+              View Projects
+            </a>
+            <!-- UPDATED: Download CV button text and background colors for dark mode -->
+            <a
+              href="https://drive.google.com/file/d/1BkGdTdvHPRDrpiQHy8sDJG04u7BnmznP/view?usp=sharing"
+              class="px-8 py-3 text-lg font-semibold text-accent-blue bg-primary-dark border border-accent-blue rounded-lg shadow-md hover:bg-accent-blue hover:text-white transition-default transform hover:scale-105"
+            >
+              View CV
+            </a>
+          </div>
         </div>
+
+        <!-- Image/Mockup Placeholder -->
+        <div class="hidden md:flex justify-center hidden-element delay-500">
+          <!-- UPDATED: Placeholder background for dark theme -->
+          <div
+            class="w-82 h-82 rounded-full bg-secondary-dark border-4 border-accent-blue shadow-xl flex items-center justify-center"
+          >
+            <!-- Placeholder for professional photo or avatar -->
+            <img
+              class="rounded-full"
+              src="https://i.ibb.co.com/G3TXC8HW/Gemini-Generated-Image-7wk6as7wk6as7wk6.png
+"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
     </section>
 
-    
     <!-- Skills Section -->
     <!-- UPDATED: Section uses secondary-dark BG -->
     <section id="skills" class="section-padding bg-secondary-dark fade-in-left">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100">My Core Stack</h2>
-            <p class="text-xl text-subtle-text mb-12 max-w-2xl mx-auto hidden-element delay-200">
-                Proficient in modern tools and frameworks to deliver scalable, state-of-the-art applications.
-            </p>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2
+          class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100"
+        >
+          My Core Stack
+        </h2>
+        <p
+          class="text-xl text-subtle-text mb-12 max-w-2xl mx-auto hidden-element delay-200"
+        >
+          Proficient in modern tools and frameworks to deliver scalable,
+          state-of-the-art applications.
+        </p>
 
-            <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-4 gap-6">
-                <!-- UPDATED: Skill cards use primary-dark BG and divider-dark border -->
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-300">
-                    <img src="https://img.icons8.com/color/48/html-5--v1.png" alt="HTML5"
-                        class="w-10 h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">HTML</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-350">
-                    <img src="https://img.icons8.com/color/48/css3.png" alt="CSS" class="w-10 h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">CSS</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-400">
-                    <img src="https://img.icons8.com/color/48/javascript--v1.png" alt="JavaScript"
-                        class="w-10 h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">JS (ES6+)</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-450">
-                    <img src="https://i.ibb.co.com/MDCX0FkB/tailwindcss-icon-icon-lg.png" alt=""
-                        class="w-10 h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">Tailwind CSS</p>
-                </div>
+        <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-4 gap-6">
+          <!-- UPDATED: Skill cards use primary-dark BG and divider-dark border -->
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-300"
+          >
+            <img
+              src="https://img.icons8.com/color/48/html-5--v1.png"
+              alt="HTML5"
+              class="w-10 h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">HTML</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-350"
+          >
+            <img
+              src="https://img.icons8.com/color/48/css3.png"
+              alt="CSS"
+              class="w-10 h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">CSS</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-400"
+          >
+            <img
+              src="https://img.icons8.com/color/48/javascript--v1.png"
+              alt="JavaScript"
+              class="w-10 h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">JS (ES6+)</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-450"
+          >
+            <img
+              src="https://i.ibb.co.com/MDCX0FkB/tailwindcss-icon-icon-lg.png"
+              alt=""
+              class="w-10 h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">Tailwind CSS</p>
+          </div>
 
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-550">
-                    <img src="https://img.icons8.com/color/48/react-native.png" alt="React"
-                        class="w-10 h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">React</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600">
-                    <!-- Adjusted icon color for dark BG -->
-                   <img src="https://i.ibb.co.com/V0jvh6PJ/nextjs.jpg" alt="React"
-                        class="w-18 rounded-full h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">Next.js</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600">
-                    <!-- Adjusted icon color for dark BG -->
-                   <img src="https://i.ibb.co.com/HLJWYMrZ/vercel.png" alt="React"
-                        class="w-18 rounded-full h-10 mx-auto mb-2">
-                    <p class="text-sm font-semibold text-primary-text">Vercel</p>
-                </div>
-                <div
-                    class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600 flex flex-col items-center ">
-                  <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#eff0f0" d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z"/></svg>
-                    <p class="text-sm font-semibold text-primary-text">Github</p>
-                </div>
-            </div>
-
-          
-
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-550"
+          >
+            <img
+              src="https://img.icons8.com/color/48/react-native.png"
+              alt="React"
+              class="w-10 h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">React</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600"
+          >
+            <!-- Adjusted icon color for dark BG -->
+            <img
+              src="https://i.ibb.co.com/V0jvh6PJ/nextjs.jpg"
+              alt="React"
+              class="w-18 rounded-full h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">Next.js</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600"
+          >
+            <!-- Adjusted icon color for dark BG -->
+            <img
+              src="https://i.ibb.co.com/HLJWYMrZ/vercel.png"
+              alt="React"
+              class="w-18 rounded-full h-10 mx-auto mb-2"
+            />
+            <p class="text-sm font-semibold text-primary-text">Vercel</p>
+          </div>
+          <div
+            class="skill-card p-4 bg-primary-dark rounded-lg shadow-md border border-divider-dark transition-default hidden-element delay-600 flex flex-col items-center"
+          >
+            <svg
+              class="w-12"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 640"
+            >
+              <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+              <path
+                fill="#eff0f0"
+                d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z"
+              />
+            </svg>
+            <p class="text-sm font-semibold text-primary-text">Github</p>
+          </div>
         </div>
+      </div>
     </section>
 
-
-     <section id="projects" class="section-padding bg-primary-dark border-y border-divider-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100">Case Studies & Project Work
-                </h2>
-                <p class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200">
-                    A blend of personal projects and client solutions demonstrating real-world problem-solving.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1: E-commerce Site -->
-                <!-- UPDATED: Card uses secondary-dark BG and divider-dark border -->
-                 <div
-                    class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-400">
-                    <div class="h-80 overflow-hidden">
-                        <!-- UPDATED: Placeholder BG and text color for dark mode -->
-                        <img src="/images/download.png"
-                            alt="Dashboard Project"
-                            class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary-text mb-2">A Travel-Site</h3>
-                        <p class="text-sm text-subtle-text mt-2"
-                            data-base-description="Developed a high-performance analytics dashboard for a SaaS platform using TypeScript and complex charting libraries. Implemented robust state management for real-time data visualization.">
-                            A responsive travel website built with React . Designed as a single-page application for fast browsing and an enhanced user experience.
-                        </p>
-                        <!-- UPDATED: Link text uses subtle-text -->
-                        <div class="flex space-x-3 mt-4">
-                            <a href="https://travel-site-bay-nine.vercel.app/" target="_blank"
-                                class="text-accent-blue hover:text-accent-green transition-default font-medium">Live
-                                Demo</a>
-                            <a href="https://github.com/TaheeraTabassum/travel-site" target="_blank"
-                                class="text-subtle-text hover:text-accent-blue transition-default font-medium">GitHub
-                                Repo</a>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <!-- Project Card 2: SaaS Dashboard -->
-              
-                 <div
-                    class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-300">
-                    <div class="h-80 overflow-hidden">
-                        <!-- UPDATED: Placeholder BG and text color for dark mode -->
-                        <img src="https://i.ibb.co.com/Z6gpQCDN/download-4.png"
-                            alt="E-commerce Project"
-                            class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary-text mb-2"> E-Commerce Shop - Front-End</h3>
-                        <p class="text-sm text-subtle-text mt-2"
-                            data-base-description="A robust e-commerce front-end built with React/Next.js and Tailwind, integrating with a custom headless CMS for product and inventory management. Focused on fast loading and mobile responsiveness.">
-                            A robust e-commerce front-end built with React and Tailwind. Focused on fast loading and mobile
-                            responsiveness.
-                        </p>
-                        <!-- UPDATED: Link text uses subtle-text -->
-                        <div class="flex space-x-3 mt-4">
-                            <a href="https://react-shop-tahira.netlify.app/" target="_blank"
-                                class="text-accent-blue hover:text-accent-green transition-default font-medium">Live
-                                Demo</a>
-                            <a href="https://github.com/TaheeraTabassum/project01-shop" target="_blank"
-                                class="text-subtle-text hover:text-accent-blue transition-default font-medium">GitHub
-                                Repo</a>
-                        </div>
-                    
-                    </div>
-                </div>
-
-                <!-- Project Card 3: Interactive Portfolio -->
-                <div
-                    class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-500">
-                    <div class="h-80 overflow-hidden">
-                        <!-- UPDATED: Placeholder BG and text color for dark mode -->
-                        <img src="/images/download (7).png"
-                            alt="Landing Page Project"
-                            class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary-text mb-2">A Online Groccery Shop</h3>
-                        <p class="text-sm text-subtle-text mt-2"
-                            data-base-description="A purely client-side interactive landing page built with modern HTML/CSS and Vanilla JS for micro-animations and complex scroll effects. Optimized for performance without frameworks.">
-                            A modern online grocery shop built with React. Users can browse categories, view product details,  and navigate seamlessly across pages—all powered by a dynamic single-page application architecture.
-                        </p>
-                        <!-- UPDATED: Link text uses subtle-text -->
-                        <div class="flex space-x-3 mt-4">
-                            <a href="https://project02-nest.vercel.app/" target="_blank"
-                                class="text-accent-blue hover:text-accent-green transition-default font-medium">Live
-                                Demo</a>
-                            <a href="https://github.com/TaheeraTabassum/project02-Nest" target="_blank"
-                                class="text-subtle-text hover:text-accent-blue transition-default font-medium">GitHub
-                                Repo</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-16 hidden-element delay-600">
-                <a href="#"
-                    class="px-8 py-3 text-lg font-semibold text-white bg-accent-green rounded-lg shadow-lg hover:bg-green-600 transition-default transform hover:scale-105">
-                    View All on GitHub
-                </a>
-            </div>
+    <section
+      id="projects"
+      class="section-padding bg-primary-dark border-y border-divider-dark"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2
+            class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100"
+          >
+            Case Studies & Project Work
+          </h2>
+          <p
+            class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200"
+          >
+            A blend of personal projects and client solutions demonstrating
+            real-world problem-solving.
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project Card 1: E-commerce Site -->
+          <!-- UPDATED: Card uses secondary-dark BG and divider-dark border -->
+          <div
+            class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-400"
+          >
+            <div class="h-80 overflow-hidden">
+              <!-- UPDATED: Placeholder BG and text color for dark mode -->
+              <img
+                src="https://i.ibb.co.com/23KHz3tH/360-F-335745675-Max-Yx-Ssadrvi-Zd-Th-ITu-HB2o-Coh-YOiw-Eu.jpg
+https://i.ibb.co.com/BVkpHsWh/360-F-138994417-z9zjy-I1oy-S2o-Ggi-JOl-NOkt25-Wwj4-Uhc-K.jpg"
+                alt="Dashboard Project"
+                class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-text mb-2">
+                A Travel-Site
+              </h3>
+              <p
+                class="text-sm text-subtle-text mt-2"
+                data-base-description="Developed a high-performance analytics dashboard for a SaaS platform using TypeScript and complex charting libraries. Implemented robust state management for real-time data visualization."
+              >
+                A responsive travel website built with React . Designed as a
+                single-page application for fast browsing and an enhanced user
+                experience.
+              </p>
+              <!-- UPDATED: Link text uses subtle-text -->
+              <div class="flex space-x-3 mt-4">
+                <a
+                  href="https://travel-site-bay-nine.vercel.app/"
+                  target="_blank"
+                  class="text-accent-blue hover:text-accent-green transition-default font-medium"
+                  >Live Demo</a
+                >
+                <a
+                  href="https://github.com/TaheeraTabassum/travel-site"
+                  target="_blank"
+                  class="text-subtle-text hover:text-accent-blue transition-default font-medium"
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 2: SaaS Dashboard -->
+
+          <div
+            class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-300"
+          >
+            <div class="h-80 overflow-hidden">
+              <!-- UPDATED: Placeholder BG and text color for dark mode -->
+              <img
+                src="https://i.ibb.co.com/Z6gpQCDN/download-4.png"
+                alt="E-commerce Project"
+                class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-text mb-2">
+                E-Commerce Shop - Front-End
+              </h3>
+              <p
+                class="text-sm text-subtle-text mt-2"
+                data-base-description="A robust e-commerce front-end built with React/Next.js and Tailwind, integrating with a custom headless CMS for product and inventory management. Focused on fast loading and mobile responsiveness."
+              >
+                A robust e-commerce front-end built with React and Tailwind.
+                Focused on fast loading and mobile responsiveness.
+              </p>
+              <!-- UPDATED: Link text uses subtle-text -->
+              <div class="flex space-x-3 mt-4">
+                <a
+                  href="https://react-shop-tahira.netlify.app/"
+                  target="_blank"
+                  class="text-accent-blue hover:text-accent-green transition-default font-medium"
+                  >Live Demo</a
+                >
+                <a
+                  href="https://github.com/TaheeraTabassum/project01-shop"
+                  target="_blank"
+                  class="text-subtle-text hover:text-accent-blue transition-default font-medium"
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 3: Interactive Portfolio -->
+          <div
+            class="group bg-secondary-dark rounded-xl shadow-lg overflow-hidden relative hover:shadow-accent-blue/30 border border-divider-dark transition-default hover:border-accent-blue hidden-element delay-500"
+          >
+            <div class="h-80 overflow-hidden">
+              <!-- UPDATED: Placeholder BG and text color for dark mode -->
+              <img
+                src="https://i.ibb.co.com/TxPt8cN4/download-7.png
+https://i.ibb.co.com/d44CMXDh/download.png"
+                alt="Landing Page Project"
+                class="w-full h-full object-cover transition-default group-hover:scale-110 opacity-80"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-text mb-2">
+                A Online Groccery Shop
+              </h3>
+              <p
+                class="text-sm text-subtle-text mt-2"
+                data-base-description="A purely client-side interactive landing page built with modern HTML/CSS and Vanilla JS for micro-animations and complex scroll effects. Optimized for performance without frameworks."
+              >
+                A modern online grocery shop built with React. Users can browse
+                categories, view product details, and navigate seamlessly across
+                pages—all powered by a dynamic single-page application
+                architecture.
+              </p>
+              <!-- UPDATED: Link text uses subtle-text -->
+              <div class="flex space-x-3 mt-4">
+                <a
+                  href="https://project02-nest.vercel.app/"
+                  target="_blank"
+                  class="text-accent-blue hover:text-accent-green transition-default font-medium"
+                  >Live Demo</a
+                >
+                <a
+                  href="https://github.com/TaheeraTabassum/project02-Nest"
+                  target="_blank"
+                  class="text-subtle-text hover:text-accent-blue transition-default font-medium"
+                  >GitHub Repo</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-16 hidden-element delay-600">
+          <a
+            href="#"
+            class="px-8 py-3 text-lg font-semibold text-white bg-accent-green rounded-lg shadow-lg hover:bg-green-600 transition-default transform hover:scale-105"
+          >
+            View All on GitHub
+          </a>
+        </div>
+      </div>
     </section>
 
-    
     <!-- About Me Section -->
     <!-- UPDATED: Section uses secondary-dark BG and divider-dark border -->
-    <section id="about" class="section-padding bg-secondary-dark border-y border-divider-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-3 gap-12 items-start">
+    <section
+      id="about"
+      class="section-padding bg-secondary-dark border-y border-divider-dark"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-12 items-start">
+          <div class="lg:col-span-2 space-y-6">
+            <h2
+              class="text-4xl font-extrabold text-primary-text mb-4 border-l-4 border-accent-blue pl-4 hidden-element delay-100"
+            >
+              About Me
+            </h2>
+            <!-- UPDATED: Text uses subtle-text -->
 
-                <div class="lg:col-span-2 space-y-6">
-                    <h2
-                        class="text-4xl font-extrabold text-primary-text mb-4 border-l-4 border-accent-blue pl-4 hidden-element delay-100">
-                        About Me</h2>
-                    <!-- UPDATED: Text uses subtle-text -->
+            <p class="text-lg text-subtle-text hidden-element delay-300">
+              I specialize in the modern JavaScript ecosystem, primarily
+              focusing on **React, Next.js**. I firmly believe in mobile-first
+              design and use utility-first frameworks like **Tailwind CSS** to
+              build highly optimized and responsive applications quickly. I
+              bridge the gap between design (Figma) and development, ensuring
+              pixel-perfect implementation every time.
+            </p>
+            <p class="text-lg text-subtle-text hidden-element delay-400">
+              When I'm not coding, you can find me exploring new UI libraries or
+              contributing to open-source projects. I'm always eager to learn
+              and ready to take on exciting projects that demand high-quality
+              front-end solutions.
+            </p>
+          </div>
 
-                    <p class="text-lg text-subtle-text hidden-element delay-300">
-                        I specialize in the modern JavaScript ecosystem, primarily focusing on **React, Next.js**. I firmly believe in mobile-first design and use utility-first frameworks like
-                        **Tailwind CSS** to build highly optimized and responsive applications quickly. I bridge the gap
-                        between design (Figma) and development, ensuring pixel-perfect implementation every time.
-                    </p>
-                    <p class="text-lg text-subtle-text hidden-element delay-400">
-                        When I'm not coding, you can find me exploring new UI libraries or contributing to open-source
-                        projects. I'm always eager to learn and ready to take on exciting projects that demand
-                        high-quality front-end solutions.
-                    </p>
-                </div>
+          <!-- Detail Cards -->
+          <div class="lg:col-span-1 space-y-6">
+            <h3
+              class="text-2xl font-semibold text-primary-text mb-4 hidden-element delay-500"
+            >
+              Key Stats
+            </h3>
 
-                <!-- Detail Cards -->
-                <div class="lg:col-span-1 space-y-6">
-                    <h3 class="text-2xl font-semibold text-primary-text mb-4 hidden-element delay-500">Key Stats</h3>
+            <!-- UPDATED: Cards use primary-dark BG and divider-dark border -->
 
-                    <!-- UPDATED: Cards use primary-dark BG and divider-dark border -->
-
-                    <div
-                        class="about-card p-6 bg-primary-dark rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-700">
-                        <p class="text-3xl font-extrabold text-accent-blue">15+</p>
-                        <p class="text-subtle-text">Projects Completed</p>
-                    </div>
-
-                    <div
-                        class="about-card p-6 bg-primary-dark rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-800">
-                        <p class="text-3xl font-extrabold text-accent-blue">100%</p>
-                        <p class="text-subtle-text">Client Satisfaction (Freelance)</p>
-                    </div>
-                </div>
+            <div
+              class="about-card p-6 bg-primary-dark rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-700"
+            >
+              <p class="text-3xl font-extrabold text-accent-blue">15+</p>
+              <p class="text-subtle-text">Projects Completed</p>
             </div>
-        </div>
-    </section>
-    
 
+            <div
+              class="about-card p-6 bg-primary-dark rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-800"
+            >
+              <p class="text-3xl font-extrabold text-accent-blue">100%</p>
+              <p class="text-subtle-text">Client Satisfaction (Freelance)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Education Section -->
     <!-- UPDATED: Section uses primary-dark BG and divider-dark border -->
-    <section id="education" class="section-padding bg-primary-dark border-y border-divider-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100">Educational
-                    Background</h2>
-                <p class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200">
-                    A strong foundation in engineering principles complemented by continuous web development learning.
-                </p>
-            </div>
-
-            <div class="space-y-8 max-w-4xl mx-auto">
-
-                <!-- Education Card 1: Diploma in Engineering -->
-                <!-- UPDATED: Cards use secondary-dark BG and divider-dark border -->
-                <div
-                    class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-300 hover:border-accent-blue transform hover:-translate-y-1">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                        <h3 class="text-2xl font-bold text-accent-blue">Diploma in Engineering (Computer Science and Technology)</h3>
-                        <span class="text-sm font-semibold text-subtle-text mt-1 sm:mt-0">2022 – 2025</span>
-                    </div>
-                    <p class="text-lg text-primary-text mb-2">Feni Computer Institute</p>
-                    <p class="text-subtle-text">Gained expertise in core engineering concepts, analytical
-                        problem-solving, and project management. This background forms the structural foundation for my
-                        systematic approach to front-end development.</p>
-                         <p class="text-lg text-primary-text mb-2">Average CGPA-3.80</p>
-                </div>
-
-                <!-- Education Card 2: Secondary School -->
-                <div
-                    class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-400 hover:border-accent-blue transform hover:-translate-y-1">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                        <h3 class="text-2xl font-bold text-accent-blue">Secondary School Certificate (SSC)</h3>
-                        <span class="text-sm font-semibold text-subtle-text mt-1 sm:mt-0">2016 – 2021</span>
-                    </div>
-                    <p class="text-lg text-primary-text mb-2">Ataturk Govt Model High School</p>
-                    <p class="text-subtle-text">Completed secondary education with Science background,
-                        building foundational skills in logic and critical thinking essential for programming.</p>
-                        <p class="text-lg text-primary-text mb-2">Passed with GPA-5.00</p>
-                </div>
-
-            </div>
+    <section
+      id="education"
+      class="section-padding bg-primary-dark border-y border-divider-dark"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2
+            class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100"
+          >
+            Educational Background
+          </h2>
+          <p
+            class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200"
+          >
+            A strong foundation in engineering principles complemented by
+            continuous web development learning.
+          </p>
         </div>
-    </section>
 
+        <div class="space-y-8 max-w-4xl mx-auto">
+          <!-- Education Card 1: Diploma in Engineering -->
+          <!-- UPDATED: Cards use secondary-dark BG and divider-dark border -->
+          <div
+            class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-300 hover:border-accent-blue transform hover:-translate-y-1"
+          >
+            <div
+              class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3"
+            >
+              <h3 class="text-2xl font-bold text-accent-blue">
+                Diploma in Engineering (Computer Science and Technology)
+              </h3>
+              <span class="text-sm font-semibold text-subtle-text mt-1 sm:mt-0"
+                >2022 – 2025</span
+              >
+            </div>
+            <p class="text-lg text-primary-text mb-2">
+              Feni Computer Institute
+            </p>
+            <p class="text-subtle-text">
+              Gained expertise in core engineering concepts, analytical
+              problem-solving, and project management. This background forms the
+              structural foundation for my systematic approach to front-end
+              development.
+            </p>
+            <p class="text-lg text-primary-text mb-2">Average CGPA-3.80</p>
+          </div>
+
+          <!-- Education Card 2: Secondary School -->
+          <div
+            class="bg-secondary-dark p-6 sm:p-8 rounded-xl shadow-lg border border-divider-dark transition-default hidden-element delay-400 hover:border-accent-blue transform hover:-translate-y-1"
+          >
+            <div
+              class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3"
+            >
+              <h3 class="text-2xl font-bold text-accent-blue">
+                Secondary School Certificate (SSC)
+              </h3>
+              <span class="text-sm font-semibold text-subtle-text mt-1 sm:mt-0"
+                >2016 – 2021</span
+              >
+            </div>
+            <p class="text-lg text-primary-text mb-2">
+              Ataturk Govt Model High School
+            </p>
+            <p class="text-subtle-text">
+              Completed secondary education with Science background, building
+              foundational skills in logic and critical thinking essential for
+              programming.
+            </p>
+            <p class="text-lg text-primary-text mb-2">Passed with GPA-5.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Projects Section -->
     <!-- UPDATED: Section uses primary-dark BG and divider-dark border -->
-   
+
     <!-- Contact & Social Section -->
     <!-- UPDATED: Section uses secondary-dark BG and divider-dark border -->
-    <section id="contact" class="section-padding bg-secondary-dark border-y border-divider-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2 flex items-center gap-16">
-            <div>
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100">Ready to
-                    Collaborate?</h2>
-                <p class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200">
-                    Let's discuss your project or opportunity. I respond quickly!
-                </p>
-            </div>
+    <section
+      id="contact"
+      class="section-padding bg-secondary-dark border-y border-divider-dark"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2 flex items-center gap-16"
+      >
+        <div>
+          <div class="text-center mb-12">
+            <h2
+              class="text-4xl font-extrabold text-primary-text mb-4 hidden-element delay-100"
+            >
+              Ready to Collaborate?
+            </h2>
+            <p
+              class="text-xl text-subtle-text max-w-2xl mx-auto hidden-element delay-200"
+            >
+              Let's discuss your project or opportunity. I respond quickly!
+            </p>
+          </div>
 
-           
-                <!-- Social Media Links -->
-                <div class="flex justify-center space-x-8 mb-12 hidden-element delay-300">
-                    <!-- GitHub -->
-                    <!-- UPDATED: BG uses primary-dark and invert for dark mode icons -->
-                    <a href="https://github.com/yourprofile" target="_blank"
-                        class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110 group"
-                        aria-label="GitHub">
-                        <img src="https://img.icons8.com/sf-regular/48/ffffff/github.png" alt="GitHub"
-                            class="w-8 h-8 group-hover:invert-0">
-                    </a>
-                    <!-- LinkedIn -->
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank"
-                        class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110"
-                        aria-label="LinkedIn">
-                        <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn" class="w-8 h-8">
-                    </a>
-                    <!-- Figma -->
-                    <a href="https://figma.com/@yourprofile" target="_blank"
-                        class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110"
-                        aria-label="Figma">
-                        <img src="https://img.icons8.com/color/48/figma--v1.png" alt="Figma" class="w-8 h-8">
-                    </a>
-                   
-                </div>
-                </div>
-
-                <!-- Contact Form -->
-                <!-- UPDATED: Form uses primary-dark BG and divider-dark border -->
-                <form id="contactForm"
-                    class="space-y-6 bg-primary-dark p-8 w-240 container mx-auto mx-40 rounded-xl border border-divider-dark shadow-xl hidden-element delay-400">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-primary-text">Your Name</label>
-                        <!-- UPDATED: Input field uses darker BG and subtle text/border -->
-                        <input type="text" name="name" id="name" required
-                            class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-primary-text">Email</label>
-                        <input type="email" name="email" id="email" required
-                            class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border">
-                    </div>
-                    <div>
-                        <label for="targetRole" class="block text-sm font-medium text-primary-text">Target Role/Company
-                            (Optional for Draft)</label>
-                        <input type="text" id="targetRole" placeholder="e.g., Senior React Developer at Google"
-                            class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border">
-                    </div>
-
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-primary-text">Message</label>
-                        <textarea id="message" name="message" rows="4" required
-                            class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border"></textarea>
-                    </div>
-                    <div>
-                        <button type="submit"
-                            class="w-full py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-[1.01]">
-                            Send Message
-                        </button>
-                    </div>
-                    <div id="contact-message" class="mt-4 text-sm text-center text-accent-green hidden">Message sent
-                        successfully! (Mock response)</div>
-                </form>
-            
+          <!-- Social Media Links -->
+          <div
+            class="flex justify-center space-x-8 mb-12 hidden-element delay-300"
+          >
+            <!-- GitHub -->
+            <!-- UPDATED: BG uses primary-dark and invert for dark mode icons -->
+            <a
+              href="https://github.com/yourprofile"
+              target="_blank"
+              class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110 group"
+              aria-label="GitHub"
+            >
+              <img
+                src="https://img.icons8.com/sf-regular/48/ffffff/github.png"
+                alt="GitHub"
+                class="w-8 h-8 group-hover:invert-0"
+              />
+            </a>
+            <!-- LinkedIn -->
+            <a
+              href="https://linkedin.com/in/yourprofile"
+              target="_blank"
+              class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110"
+              aria-label="LinkedIn"
+            >
+              <img
+                src="https://img.icons8.com/color/48/linkedin.png"
+                alt="LinkedIn"
+                class="w-8 h-8"
+              />
+            </a>
+            <!-- Figma -->
+            <a
+              href="https://figma.com/@yourprofile"
+              target="_blank"
+              class="p-4 bg-primary-dark rounded-full hover:bg-accent-blue transition-default transform hover:scale-110"
+              aria-label="Figma"
+            >
+              <img
+                src="https://img.icons8.com/color/48/figma--v1.png"
+                alt="Figma"
+                class="w-8 h-8"
+              />
+            </a>
+          </div>
         </div>
+
+        <!-- Contact Form -->
+        <!-- UPDATED: Form uses primary-dark BG and divider-dark border -->
+        <form
+          id="contactForm"
+          class="space-y-6 bg-primary-dark p-8 w-240 container mx-auto mx-40 rounded-xl border border-divider-dark shadow-xl hidden-element delay-400"
+        >
+          <div>
+            <label
+              for="name"
+              class="block text-sm font-medium text-primary-text"
+              >Your Name</label
+            >
+            <!-- UPDATED: Input field uses darker BG and subtle text/border -->
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border"
+            />
+          </div>
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-primary-text"
+              >Email</label
+            >
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border"
+            />
+          </div>
+          <div>
+            <label
+              for="targetRole"
+              class="block text-sm font-medium text-primary-text"
+              >Target Role/Company (Optional for Draft)</label
+            >
+            <input
+              type="text"
+              id="targetRole"
+              placeholder="e.g., Senior React Developer at Google"
+              class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border"
+            />
+          </div>
+
+          <div>
+            <label
+              for="message"
+              class="block text-sm font-medium text-primary-text"
+              >Message</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              class="mt-1 block w-full rounded-lg border-divider-dark bg-slate-700 text-primary-text focus:border-accent-blue focus:ring-accent-blue p-3 border"
+            ></textarea>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="w-full py-3 text-lg font-semibold text-white bg-accent-blue rounded-lg shadow-lg hover:bg-blue-500 transition-default transform hover:scale-[1.01]"
+            >
+              Send Message
+            </button>
+          </div>
+          <div
+            id="contact-message"
+            class="mt-4 text-sm text-center text-accent-green hidden"
+          >
+            Message sent successfully! (Mock response)
+          </div>
+        </form>
+      </div>
     </section>
 
     <!-- Footer -->
     <!-- UPDATED: Footer uses primary-dark BG and subtle text/border -->
     <footer class="bg-primary-dark py-6 border-t border-divider-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-subtle-text">
-            Built and Designed by Tahira. &copy; 2025.
-        </div>
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-subtle-text"
+      >
+        Built and Designed by Tahira. &copy; 2025.
+      </div>
     </footer>
 
     <script>
-        // Check for global variables provided by the environment
-        const apiKey = "";
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      // Check for global variables provided by the environment
+      const apiKey = "";
+      const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
-        // --- Utility Functions ---
+      // --- Utility Functions ---
 
-        /**
-         * Generic function to call the Gemini API with exponential backoff.
-         * @param {string} userQuery - The main prompt text.
-         * @param {string} systemPrompt - Instructions for the model's persona/behavior.
-         * @param {boolean} useGrounding - Whether to enable Google Search grounding.
-         * @returns {Promise<{text: string, sources: Array<{uri: string, title: string}>}>}
-         */
-        async function callGeminiAPI(userQuery, systemPrompt, useGrounding = false) {
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-            };
+      /**
+       * Generic function to call the Gemini API with exponential backoff.
+       * @param {string} userQuery - The main prompt text.
+       * @param {string} systemPrompt - Instructions for the model's persona/behavior.
+       * @param {boolean} useGrounding - Whether to enable Google Search grounding.
+       * @returns {Promise<{text: string, sources: Array<{uri: string, title: string}>}>}
+       */
+      async function callGeminiAPI(
+        userQuery,
+        systemPrompt,
+        useGrounding = false
+      ) {
+        const payload = {
+          contents: [{ parts: [{ text: userQuery }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+        };
 
-            if (useGrounding) {
-                payload.tools = [{ "google_search": {} }];
-            }
-
-            const maxRetries = 5;
-            let lastError = null;
-
-            for (let attempt = 0; attempt < maxRetries; attempt++) {
-                try {
-                    const response = await fetch(GEMINI_API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        const errorBody = await response.json();
-                        lastError = new Error(`API call failed with status ${response.status}: ${JSON.stringify(errorBody)}`);
-                        throw lastError;
-                    }
-
-                    const result = await response.json();
-                    const candidate = result.candidates?.[0];
-
-                    if (candidate && candidate.content?.parts?.[0]?.text) {
-                        const text = candidate.content.parts[0].text;
-                        let sources = [];
-
-                        const groundingMetadata = candidate.groundingMetadata;
-                        if (groundingMetadata && groundingMetadata.groundingAttributions) {
-                            sources = groundingMetadata.groundingAttributions
-                                .map(attribution => ({
-                                    uri: attribution.web?.uri,
-                                    title: attribution.web?.title,
-                                }))
-                                .filter(source => source.uri && source.title);
-                        }
-
-                        return { text, sources };
-                    } else {
-                        lastError = new Error("Empty or invalid response structure from API.");
-                        throw lastError;
-                    }
-                } catch (error) {
-                    lastError = error;
-                    if (attempt < maxRetries - 1) {
-                        const delay = Math.pow(2, attempt) * 1000;
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                    }
-                }
-            }
-
-            // If all retries fail, throw the last error
-            console.error("Gemini API call failed after multiple retries:", lastError);
-            throw lastError;
+        if (useGrounding) {
+          payload.tools = [{ google_search: {} }];
         }
 
-        /**
-         * Displays the AI response and handles the modal appearance.
-         * @param {string} title 
-         * @param {string} content 
-         * @param {Array<{uri: string, title: string}>} sources 
-         */
-        function showGeminiModal(title, content, sources = []) {
-            const modal = document.getElementById('geminiModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalContent = document.getElementById('modalContent');
-            const modalSources = document.getElementById('modalSources');
-            const sourcesList = document.getElementById('sourcesList');
-            const innerModal = modal.querySelector('div');
+        const maxRetries = 5;
+        let lastError = null;
 
-            modalTitle.textContent = title;
-            // The content might contain a blockquote with bg-gray-50, which needs to be adjusted for dark mode
-            // Replacing bg-gray-50 with a dark mode appropriate color (e.g., bg-slate-700)
-            const darkModeContent = content.replace('bg-gray-50', 'bg-slate-700 text-primary-text');
+        for (let attempt = 0; attempt < maxRetries; attempt++) {
+          try {
+            const response = await fetch(GEMINI_API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
 
-            modalContent.innerHTML = darkModeContent; // Content is now expected to be HTML-formatted (or text with <br>)
+            if (!response.ok) {
+              const errorBody = await response.json();
+              lastError = new Error(
+                `API call failed with status ${
+                  response.status
+                }: ${JSON.stringify(errorBody)}`
+              );
+              throw lastError;
+            }
 
-            sourcesList.innerHTML = '';
-            if (sources.length > 0) {
-                modalSources.classList.remove('hidden');
-                sources.forEach(source => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<a href="${source.uri}" target="_blank" class="text-accent-blue hover:underline">${source.title || source.uri}</a>`;
-                    sourcesList.appendChild(li);
-                });
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+              const text = candidate.content.parts[0].text;
+              let sources = [];
+
+              const groundingMetadata = candidate.groundingMetadata;
+              if (
+                groundingMetadata &&
+                groundingMetadata.groundingAttributions
+              ) {
+                sources = groundingMetadata.groundingAttributions
+                  .map((attribution) => ({
+                    uri: attribution.web?.uri,
+                    title: attribution.web?.title,
+                  }))
+                  .filter((source) => source.uri && source.title);
+              }
+
+              return { text, sources };
             } else {
-                modalSources.classList.add('hidden');
+              lastError = new Error(
+                "Empty or invalid response structure from API."
+              );
+              throw lastError;
             }
-
-            modal.classList.remove('hidden');
-            // Trigger animation
-            setTimeout(() => {
-                modal.classList.add('flex');
-                innerModal.classList.remove('scale-95', 'opacity-0');
-            }, 10);
+          } catch (error) {
+            lastError = error;
+            if (attempt < maxRetries - 1) {
+              const delay = Math.pow(2, attempt) * 1000;
+              await new Promise((resolve) => setTimeout(resolve, delay));
+            }
+          }
         }
 
-        function hideGeminiModal() {
-            const modal = document.getElementById('geminiModal');
-            const innerModal = modal.querySelector('div');
+        // If all retries fail, throw the last error
+        console.error(
+          "Gemini API call failed after multiple retries:",
+          lastError
+        );
+        throw lastError;
+      }
 
-            innerModal.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300); // Wait for transition
+      /**
+       * Displays the AI response and handles the modal appearance.
+       * @param {string} title
+       * @param {string} content
+       * @param {Array<{uri: string, title: string}>} sources
+       */
+      function showGeminiModal(title, content, sources = []) {
+        const modal = document.getElementById("geminiModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalContent = document.getElementById("modalContent");
+        const modalSources = document.getElementById("modalSources");
+        const sourcesList = document.getElementById("sourcesList");
+        const innerModal = modal.querySelector("div");
+
+        modalTitle.textContent = title;
+        // The content might contain a blockquote with bg-gray-50, which needs to be adjusted for dark mode
+        // Replacing bg-gray-50 with a dark mode appropriate color (e.g., bg-slate-700)
+        const darkModeContent = content.replace(
+          "bg-gray-50",
+          "bg-slate-700 text-primary-text"
+        );
+
+        modalContent.innerHTML = darkModeContent; // Content is now expected to be HTML-formatted (or text with <br>)
+
+        sourcesList.innerHTML = "";
+        if (sources.length > 0) {
+          modalSources.classList.remove("hidden");
+          sources.forEach((source) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${
+              source.uri
+            }" target="_blank" class="text-accent-blue hover:underline">${
+              source.title || source.uri
+            }</a>`;
+            sourcesList.appendChild(li);
+          });
+        } else {
+          modalSources.classList.add("hidden");
         }
 
-        document.getElementById('closeModal').addEventListener('click', hideGeminiModal);
+        modal.classList.remove("hidden");
+        // Trigger animation
+        setTimeout(() => {
+          modal.classList.add("flex");
+          innerModal.classList.remove("scale-95", "opacity-0");
+        }, 10);
+      }
 
-        // --- LLM Feature Handlers ---
+      function hideGeminiModal() {
+        const modal = document.getElementById("geminiModal");
+        const innerModal = modal.querySelector("div");
 
-        /**
-         * Feature 1: Enhances a project description.
-         * @param {HTMLButtonElement} button - The button element clicked.
-         * @param {string} projectTitle - The title of the project.
-         */
-        async function handleProjectEnhancement(button, projectTitle) {
-            const descriptionElement = button.previousElementSibling.previousElementSibling.previousElementSibling;
-            const baseDescription = descriptionElement.getAttribute('data-base-description');
+        innerModal.classList.add("scale-95", "opacity-0");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }, 300); // Wait for transition
+      }
 
-            button.disabled = true;
-            const originalHtml = button.innerHTML;
-            button.innerHTML = '<span class="loader w-4 h-4 mr-2"></span> Generating...';
+      document
+        .getElementById("closeModal")
+        .addEventListener("click", hideGeminiModal);
 
-            const systemPrompt = "You are a professional marketing copywriter. Your task is to take a technical project description and rewrite it into a short, compelling, and marketing-friendly summary (max 3 sentences). Focus on the value and impact.";
-            const userQuery = `Project Title: ${projectTitle}\nTechnical Description: ${baseDescription}\n\nRewrite the description:`;
+      // --- LLM Feature Handlers ---
 
-            try {
-                const { text } = await callGeminiAPI(userQuery, systemPrompt, false);
+      /**
+       * Feature 1: Enhances a project description.
+       * @param {HTMLButtonElement} button - The button element clicked.
+       * @param {string} projectTitle - The title of the project.
+       */
+      async function handleProjectEnhancement(button, projectTitle) {
+        const descriptionElement =
+          button.previousElementSibling.previousElementSibling
+            .previousElementSibling;
+        const baseDescription = descriptionElement.getAttribute(
+          "data-base-description"
+        );
 
-                // Update the visible description on the card with the new content
-                descriptionElement.textContent = text;
-                // Store the new content back in the data attribute so it can be re-enhanced if needed
-                descriptionElement.setAttribute('data-base-description', text);
+        button.disabled = true;
+        const originalHtml = button.innerHTML;
+        button.innerHTML =
+          '<span class="loader w-4 h-4 mr-2"></span> Generating...';
 
-                // Use a blockquote for better presentation of the generated text
-                // IMPORTANT: Note the manual class update in showGeminiModal for dark mode compatibility
-                const contentHtml = `The new description for "${projectTitle}" has been generated and updated on the card: <br><br><blockquote class="border-l-4 border-accent-blue pl-4 py-1 italic bg-gray-50">${text}</blockquote>`;
-                showGeminiModal("Project Description Enhanced ✨", contentHtml, []);
+        const systemPrompt =
+          "You are a professional marketing copywriter. Your task is to take a technical project description and rewrite it into a short, compelling, and marketing-friendly summary (max 3 sentences). Focus on the value and impact.";
+        const userQuery = `Project Title: ${projectTitle}\nTechnical Description: ${baseDescription}\n\nRewrite the description:`;
 
-            } catch (error) {
-                showGeminiModal("Error", "Could not generate enhanced description. Please check the console for details.", []);
-            } finally {
-                button.disabled = false;
-                button.innerHTML = originalHtml;
-            }
+        try {
+          const { text } = await callGeminiAPI(userQuery, systemPrompt, false);
+
+          // Update the visible description on the card with the new content
+          descriptionElement.textContent = text;
+          // Store the new content back in the data attribute so it can be re-enhanced if needed
+          descriptionElement.setAttribute("data-base-description", text);
+
+          // Use a blockquote for better presentation of the generated text
+          // IMPORTANT: Note the manual class update in showGeminiModal for dark mode compatibility
+          const contentHtml = `The new description for "${projectTitle}" has been generated and updated on the card: <br><br><blockquote class="border-l-4 border-accent-blue pl-4 py-1 italic bg-gray-50">${text}</blockquote>`;
+          showGeminiModal("Project Description Enhanced ✨", contentHtml, []);
+        } catch (error) {
+          showGeminiModal(
+            "Error",
+            "Could not generate enhanced description. Please check the console for details.",
+            []
+          );
+        } finally {
+          button.disabled = false;
+          button.innerHTML = originalHtml;
+        }
+      }
+
+      /**
+       * Feature 2: Drafts a cover letter introduction.
+       */
+      async function handleDraftCoverLetter() {
+        const name = document.getElementById("name").value;
+        const target = document.getElementById("targetRole").value;
+        const messageTextarea = document.getElementById("message");
+        const draftButton = document.getElementById("draftButton");
+
+        if (!name) {
+          showGeminiModal(
+            "Missing Information",
+            "Please enter your name in the 'Your Name' field before drafting a letter.",
+            []
+          );
+          return;
         }
 
+        draftButton.disabled = true;
+        const originalHtml = draftButton.innerHTML;
+        draftButton.innerHTML =
+          '<span class="loader w-4 h-4 mr-2"></span> Drafting Letter...';
 
-        /**
-         * Feature 2: Drafts a cover letter introduction.
-         */
-        async function handleDraftCoverLetter() {
-            const name = document.getElementById('name').value;
-            const target = document.getElementById('targetRole').value;
-            const messageTextarea = document.getElementById('message');
-            const draftButton = document.getElementById('draftButton');
+        const portfolioSummary = document
+          .getElementById("hero-pitch")
+          .textContent.trim();
+        const skillSummary =
+          "Core stack: React, Next.js, TypeScript, Tailwind CSS, HTML/CSS/JS (ES6+).";
 
-            if (!name) {
-                showGeminiModal("Missing Information", "Please enter your name in the 'Your Name' field before drafting a letter.", []);
-                return;
-            }
+        const systemPrompt =
+          "You are a helpful career assistant. Your task is to draft a short, professional, and personalized introduction paragraph (max 4 sentences) for a cover letter. Use the provided portfolio summary and target role to tailor the response. The greeting should start with 'Dear Hiring Manager,'";
 
-            draftButton.disabled = true;
-            const originalHtml = draftButton.innerHTML;
-            draftButton.innerHTML = '<span class="loader w-4 h-4 mr-2"></span> Drafting Letter...';
-
-            const portfolioSummary = document.getElementById('hero-pitch').textContent.trim();
-            const skillSummary = "Core stack: React, Next.js, TypeScript, Tailwind CSS, HTML/CSS/JS (ES6+).";
-
-            const systemPrompt = "You are a helpful career assistant. Your task is to draft a short, professional, and personalized introduction paragraph (max 4 sentences) for a cover letter. Use the provided portfolio summary and target role to tailor the response. The greeting should start with 'Dear Hiring Manager,'";
-
-            const userQuery = `
+        const userQuery = `
                 Draft a cover letter introduction paragraph.
                 Applicant Name: ${name}
                 Applicant Summary: ${portfolioSummary}
                 Applicant Skills: ${skillSummary}
-                Target Role/Company: ${target || 'a suitable Front-End Developer role'}
+                Target Role/Company: ${
+                  target || "a suitable Front-End Developer role"
+                }
             `;
 
-            try {
-                const { text, sources } = await callGeminiAPI(userQuery, systemPrompt, true);
+        try {
+          const { text, sources } = await callGeminiAPI(
+            userQuery,
+            systemPrompt,
+            true
+          );
 
-                // Prepend the generated text to the existing message (or set it if empty)
-                messageTextarea.value = text + "\n\n" + messageTextarea.value;
+          // Prepend the generated text to the existing message (or set it if empty)
+          messageTextarea.value = text + "\n\n" + messageTextarea.value;
 
-                // IMPORTANT: Note the manual class update in showGeminiModal for dark mode compatibility (bg-gray-100 to bg-slate-700)
-                const contentHtml = `The following introduction has been placed in your message box. Remember to personalize it further.<br><br><div class="bg-gray-100 p-3 rounded-lg border border-gray-200 whitespace-pre-wrap">${text}</div>`;
+          // IMPORTANT: Note the manual class update in showGeminiModal for dark mode compatibility (bg-gray-100 to bg-slate-700)
+          const contentHtml = `The following introduction has been placed in your message box. Remember to personalize it further.<br><br><div class="bg-gray-100 p-3 rounded-lg border border-gray-200 whitespace-pre-wrap">${text}</div>`;
 
-                showGeminiModal("Cover Letter Drafted! ✨", contentHtml, sources);
+          showGeminiModal("Cover Letter Drafted! ✨", contentHtml, sources);
+        } catch (error) {
+          showGeminiModal(
+            "Error",
+            "Could not draft the cover letter. Please ensure your network is stable and try again.",
+            []
+          );
+        } finally {
+          draftButton.disabled = false;
+          draftButton.innerHTML = originalHtml;
+        }
+      }
 
-            } catch (error) {
-                showGeminiModal("Error", "Could not draft the cover letter. Please ensure your network is stable and try again.", []);
-            } finally {
-                draftButton.disabled = false;
-                draftButton.innerHTML = originalHtml;
-            }
+      /**
+       * Feature 3: Analyzes portfolio skills against a target role and suggests gaps using Google Search.
+       */
+      async function handleSkillGapAnalysis() {
+        const targetJobRole = document
+          .getElementById("targetJobRole")
+          .value.trim();
+        const analyzeButton = document.getElementById("analyzeButton");
+
+        if (!targetJobRole) {
+          showGeminiModal(
+            "Missing Target Role",
+            "Please enter the target job title you want to analyze against in the input field.",
+            []
+          );
+          return;
         }
 
+        analyzeButton.disabled = true;
+        const originalHtml = analyzeButton.innerHTML;
+        analyzeButton.innerHTML =
+          '<span class="loader w-4 h-4 mr-2"></span> Analyzing Gaps...';
 
-        /**
-         * Feature 3: Analyzes portfolio skills against a target role and suggests gaps using Google Search.
-         */
-        async function handleSkillGapAnalysis() {
-            const targetJobRole = document.getElementById('targetJobRole').value.trim();
-            const analyzeButton = document.getElementById('analyzeButton');
+        // Statically defined skills for context
+        const mySkills = [
+          "HTML5",
+          "CSS3",
+          "JavaScript (ES6+)",
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "DaisyUI",
+          "Responsive Design",
+          "State Management (Hooks/Context)",
+        ].join(", ");
 
-            if (!targetJobRole) {
-                showGeminiModal("Missing Target Role", "Please enter the target job title you want to analyze against in the input field.", []);
-                return;
-            }
-
-            analyzeButton.disabled = true;
-            const originalHtml = analyzeButton.innerHTML;
-            analyzeButton.innerHTML = '<span class="loader w-4 h-4 mr-2"></span> Analyzing Gaps...';
-
-            // Statically defined skills for context
-            const mySkills = [
-                "HTML5", "CSS3", "JavaScript (ES6+)", "React", "Next.js",
-                "TypeScript", "Tailwind CSS", "DaisyUI", "Responsive Design",
-                "State Management (Hooks/Context)"
-            ].join(', ');
-
-            const systemPrompt = `You are a career consultant specialized in Front-End development. Analyze the provided skills against the requirements for the target role. Provide a response that is professional and encouraging.
+        const systemPrompt = `You are a career consultant specialized in Front-End development. Analyze the provided skills against the requirements for the target role. Provide a response that is professional and encouraging.
 
 1. List 3 critical missing skills or technologies required for the given role that the applicant should focus on learning.
 2. Briefly explain why each skill is important for that specific role, using information retrieved from Google Search.
 3. The entire response must be formatted as a single, detailed, numbered list.`;
 
-            const userQuery = `
+        const userQuery = `
                 Analyze the skill gap for the target job role: "${targetJobRole}".
                 Applicant's Current Skills: ${mySkills}
                 
                 Based on current industry requirements for the target role, what 3 critical skills should the applicant learn?
             `;
 
-            try {
-                const { text, sources } = await callGeminiAPI(userQuery, systemPrompt, true);
+        try {
+          const { text, sources } = await callGeminiAPI(
+            userQuery,
+            systemPrompt,
+            true
+          );
 
-                // Convert list output to HTML list for modal display
-                const contentHtml = text.replace(/\n/g, '<br>');
+          // Convert list output to HTML list for modal display
+          const contentHtml = text.replace(/\n/g, "<br>");
 
-                showGeminiModal(`Skill Gap Analysis for ${targetJobRole} ✨`, contentHtml, sources);
-
-            } catch (error) {
-                showGeminiModal("Error", "Could not perform the skill gap analysis. Please try again.", []);
-            } finally {
-                analyzeButton.disabled = false;
-                analyzeButton.innerHTML = originalHtml;
-            }
+          showGeminiModal(
+            `Skill Gap Analysis for ${targetJobRole} ✨`,
+            contentHtml,
+            sources
+          );
+        } catch (error) {
+          showGeminiModal(
+            "Error",
+            "Could not perform the skill gap analysis. Please try again.",
+            []
+          );
+        } finally {
+          analyzeButton.disabled = false;
+          analyzeButton.innerHTML = originalHtml;
         }
+      }
 
-        // --- Intersection Observer Logic for Entrance Animations ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const elementsToObserve = document.querySelectorAll('.hidden-element');
+      // --- Intersection Observer Logic for Entrance Animations ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const elementsToObserve = document.querySelectorAll(".hidden-element");
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
 
-            const observerCallback = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
+        const observerCallback = (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        };
 
-            const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const observer = new IntersectionObserver(
+          observerCallback,
+          observerOptions
+        );
 
-            elementsToObserve.forEach(element => {
-                observer.observe(element);
-            });
+        elementsToObserve.forEach((element) => {
+          observer.observe(element);
         });
+      });
 
-        // Simple mock form submission logic
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const messageDiv = document.getElementById('contact-message');
-            messageDiv.classList.remove('hidden');
+      // Simple mock form submission logic
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const messageDiv = document.getElementById("contact-message");
+          messageDiv.classList.remove("hidden");
 
-            // Custom modal box for alerts/confirmations (since native alert() is forbidden)
-            const alertBox = document.createElement('div');
-            alertBox.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50';
-            // UPDATED: Alert box uses dark theme colors
-            alertBox.innerHTML = `
+          // Custom modal box for alerts/confirmations (since native alert() is forbidden)
+          const alertBox = document.createElement("div");
+          alertBox.className =
+            "fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50";
+          // UPDATED: Alert box uses dark theme colors
+          alertBox.innerHTML = `
                 <div class="bg-secondary-dark p-8 rounded-xl shadow-2xl max-w-sm w-full text-center border border-divider-dark transition-default">
                     <h3 class="text-xl font-bold text-accent-blue mb-3">Success!</h3>
                     <p class="text-primary-text mb-6">Thank you for your message. I'll get back to you shortly.</p>
                     <button id="closeAlert" class="px-6 py-2 bg-accent-blue text-white rounded-lg hover:bg-blue-500 transition-default">Close</button>
                 </div>
             `;
-            document.body.appendChild(alertBox);
+          document.body.appendChild(alertBox);
 
-            document.getElementById('closeAlert').onclick = () => {
-                document.body.removeChild(alertBox);
-            };
+          document.getElementById("closeAlert").onclick = () => {
+            document.body.removeChild(alertBox);
+          };
 
-            // Clear form (except for name/target role if drafting again)
-            // Note: We don't clear the message box immediately so the user can copy the AI draft
-            document.getElementById('email').value = '';
+          // Clear form (except for name/target role if drafting again)
+          // Note: We don't clear the message box immediately so the user can copy the AI draft
+          document.getElementById("email").value = "";
 
-            // Hide the inline message after a short delay
-            setTimeout(() => messageDiv.classList.add('hidden'), 5000);
+          // Hide the inline message after a short delay
+          setTimeout(() => messageDiv.classList.add("hidden"), 5000);
         });
     </script>
-</body>
-
+  </body>
 </html>
